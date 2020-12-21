@@ -1,0 +1,61 @@
+Setting GOPATH for terminal session (not permanently)
+export GOPATH="/workspace-dir"
+
+Array: list of values of a particular type. Fixed in size (cannot grow/shrink after initialization)
+
+Pointers: you can a pointer to a variable by typing "address of" operator (&) right before the variable name (&myVar)
+Pointer types are written with a * followed by the type of value the pointer points to (*int, *bool, etc.)
+
+// Update value at a pointer
+myFloat := 4.2
+fmt.Println(myFloat)
+myFloatPointer := &myFloat
+*myFloatPointer = 99.9
+fmt.Println(*myFloatPointer)
+fmt.Println(&myFloatPointer)
+fmt.Println(myFloat)
+
+// Array vs Slice : fixed vs non-fixed in size
+var myArray [5]int
+var mySlice []int
+
+//Variadic function
+func myVarFunc(a int, b ...string){
+}
+
+// Encapsulation
+Can be achieved via making the struct fields unexported (lower-case names) and
+adding setter/getter methods within the same package to access values from other packages.
+Unexported (lower-case names) properties of embedded structures won't be promoted to own properties of host-type
+so won't be accessible via dot notation.
+
+// Interfaces and type assertions
+Converts interface type back to concrete type
+var ct ConcreteType = Interface.(ConcreteType)
+// Empty interface
+interface {} - called empty interface. it doesn't require any method to satisfy it,
+and so it's satisfied by all types
+
+
+// Defer
+Statement applied to function/method call to ensure it will run no matter what,
+even if the calling function exits early (with return, for example)
+Useful application - ensure file will be closed anyway, even if error happened
+// Panic/Recover
+Raise runtime error/get and process error value
+
+// Goroutines
+Functions and methods that run concurrently - they can be used in cycle to
+pause -> switch to do other job -> resume methods execution.
+  go funcName()
+All go programs have at least 1 goroutine - the one that calls the main function when program starts. Program stops end
+when main goroutine stops, even if other goroutines haven't completed their work yet. Sleep function pauses goroutine
+for amount of time passed as parameter
+  time.Sleep(5 * time.Second())
+Channels - data structure used to send values between goroutines and return results
+(which is impossible for goroutines by default).
+  c = make(chan int)
+Channels are blocking - sending a value to a channel pauses the current goroutine (sender) until that value is received.
+Attempting to receive a value also blocks the current goroutine until value is sent on a channel
+
+
